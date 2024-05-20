@@ -18,6 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final nameController = TextEditingController();
 
   // sign up user
   void signUp() async {
@@ -30,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final authService = Provider.of<AuthService>(context, listen: false);
     try {
       await authService.signUpWithEmailPassword(
-          emailController.text, passwordController.text);
+          emailController.text, passwordController.text, nameController.text);
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));
@@ -73,15 +74,23 @@ class _RegisterPageState extends State<RegisterPage> {
                   //email textfield
                   MyTextField(
                       controller: emailController,
-                      hintText: 'Email',
+                      hintText: '이메일',
                       obscureText: false),
                   const SizedBox(
                     height: 10,
                   ),
+                  // name textfield
+                  MyTextField(
+                      controller: nameController,
+                      hintText: '이름',
+                      obscureText: false),
+                  const SizedBox(
+                    height: 25,
+                  ),
                   //password textfield
                   MyTextField(
                       controller: passwordController,
-                      hintText: 'Password',
+                      hintText: '비밀번호',
                       obscureText: true),
                   const SizedBox(
                     height: 10,
@@ -89,13 +98,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   //confirm password textfield
                   MyTextField(
                       controller: confirmPasswordController,
-                      hintText: 'Confirm Password',
+                      hintText: '비밀번호 확인',
                       obscureText: true),
                   const SizedBox(
                     height: 25,
                   ),
                   //sign up button
-                  MyButton(onTap: signUp, text: "Sign Un"),
+                  MyButton(onTap: signUp, text: "회원가입"),
                   const SizedBox(
                     height: 50,
                   ),
