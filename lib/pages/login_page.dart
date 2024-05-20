@@ -17,14 +17,14 @@ class _LoginPageState extends State<LoginPage> {
   //text controller
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
+  final nameController = TextEditingController();
   // sign in user
   void signIn() async {
-    //get the quth service
+    //get the auth service
     final authService = Provider.of<AuthService>(context, listen: false);
     try {
       await authService.signInWithEmailPassword(
-          emailController.text, passwordController.text);
+          emailController.text, passwordController.text, nameController.text) ;
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));

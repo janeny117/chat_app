@@ -31,7 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final authService = Provider.of<AuthService>(context, listen: false);
     try {
       await authService.signUpWithEmailPassword(
-          emailController.text, passwordController.text);
+          emailController.text, passwordController.text, nameController.text);
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));
@@ -83,7 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   MyTextField(
                       controller: nameController,
                       hintText: '이름',
-                      obscureText: true),
+                      obscureText: false),
                   const SizedBox(
                     height: 25,
                   ),
