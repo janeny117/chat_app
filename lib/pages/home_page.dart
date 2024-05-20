@@ -2,6 +2,7 @@ import 'package:chat_app_tutorial/pages/chat_page.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // instance of auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  int _selectedIndex = 0;
 
   // sign user out
   void signOut() {
@@ -22,6 +24,12 @@ class _HomePageState extends State<HomePage> {
     final authService = Provider.of<AuthService>(context, listen: false);
 
     authService.signOut();
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
@@ -39,7 +47,58 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: _buildUserList(),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: [
+          _buildUserList(),
+          Screen2(),
+          Screen3()
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '탭1'
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.chat_bubble_outline),
+              label: '탭2'
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: '탭3'
+          )
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+
+  Widget Screen2() {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          'Screen2',
+          style: TextStyle(
+            fontSize: 20.0,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget Screen3() {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          'Screen3',
+          style: TextStyle(
+            fontSize: 20.0,
+          ),
+        ),
+      ),
     );
   }
 
