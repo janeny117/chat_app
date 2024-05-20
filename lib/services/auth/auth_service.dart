@@ -11,7 +11,7 @@ class AuthService extends ChangeNotifier {
 
   // sign user in
   Future<UserCredential> signInWithEmailPassword(
-      String email, String password) async {
+      String email, String password, name) async {
     try {
       // sign in
       UserCredential userCredential = await _firebaseAuth
@@ -20,6 +20,7 @@ class AuthService extends ChangeNotifier {
       _fireStore.collection('users').doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'email': email,
+        'name':name,
       }, SetOptions(merge: true));
 
       return userCredential;
@@ -31,16 +32,17 @@ class AuthService extends ChangeNotifier {
 
 // create a new user
   Future<UserCredential> signUpWithEmailPassword(
-      String email, String password) async {
+      String email, String password, String name) async {
     try {
       UserCredential userCredential = await _firebaseAuth
-          .createUserWithEmailAndPassword(email: email, password: password);
+          .createUserWithEmailAndPassword(email: email, password: password, );
 
       //after creating the user, create a new document for the user in the user collection
       _fireStore.collection('users').doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'email': email,
-      });
+        'name' : name,
+      }, SetOptions(merge: true));
       return userCredential;
     } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
