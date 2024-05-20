@@ -40,7 +40,8 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.receiverUserEmail),
+        backgroundColor: Colors.blue,
+        title: Text(widget.receiverUserEmail, style: TextStyle(color: Colors.white,)),
       ),
       body: Column(
         children: [
