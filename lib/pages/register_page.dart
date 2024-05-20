@@ -100,6 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 50,
                   ),
                   Row(
+                    
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Already a Member?"),
