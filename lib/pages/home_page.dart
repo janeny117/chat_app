@@ -28,12 +28,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cloud Talk"),
+        backgroundColor: Colors.blue,
+        title: Text("Cloud Talk", style: TextStyle(color: Colors.white,)),
         actions: [
           // sign out button
           IconButton(
             onPressed: signOut,
             icon: const Icon(Icons.logout),
+            color: Colors.white,
           )
         ],
       ),
