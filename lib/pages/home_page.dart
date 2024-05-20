@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:chat_app_tutorial/pages/loading_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -52,7 +53,7 @@ class _HomePageState extends State<HomePage> {
           return const Text('error');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text("loading");
+          return LoadingPage();
         }
         return ListView(
           children: snapshot.data!.docs
