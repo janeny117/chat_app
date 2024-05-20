@@ -1,6 +1,4 @@
-import 'package:chat_app_tutorial/components/error_bubble.dart';
 import 'package:chat_app_tutorial/firebase_options.dart';
-import 'package:chat_app_tutorial/pages/error_page.dart';
 import 'package:chat_app_tutorial/services/auth/auth_gate.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
 import 'package:firebase_core/firebase_core.dart';
