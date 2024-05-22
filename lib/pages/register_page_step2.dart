@@ -1,6 +1,7 @@
 import 'package:chat_app_tutorial/pages/login_page.dart';
 import 'package:chat_app_tutorial/pages/register_finished_page.dart';
 import 'package:chat_app_tutorial/pages/register_page_step2.dart';
+import 'package:chat_app_tutorial/services/auth/auth_gate.dart';
 import 'package:chat_app_tutorial/services/auth/login_or_register.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
   void goToLoginPage(){
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginOrRegister())
+        MaterialPageRoute(builder: (context) => AuthGate())
     );
   }
 
