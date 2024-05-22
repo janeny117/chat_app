@@ -30,8 +30,6 @@ class _RegisterStep2State extends State<RegisterStep2> {
 
   // sign up user
   void signUp() async {
-    print(emailController.text);
-    print(nameController.text);
 
     emailController = widget.emailController;
     nameController = widget.nameController;
@@ -45,7 +43,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
     final authService = Provider.of<AuthService>(context, listen: false);
     try {
       await authService.signUpWithEmailPassword(
-          emailController.text, passwordController.text);
+          emailController.text, passwordController.text, nameController.text);
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));
