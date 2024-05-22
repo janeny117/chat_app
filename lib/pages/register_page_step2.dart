@@ -1,4 +1,5 @@
 import 'package:chat_app_tutorial/pages/login_page.dart';
+import 'package:chat_app_tutorial/pages/register_finished_page.dart';
 import 'package:chat_app_tutorial/pages/register_page_step2.dart';
 import 'package:chat_app_tutorial/services/auth/login_or_register.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,6 +45,11 @@ class _RegisterStep2State extends State<RegisterStep2> {
     try {
       await authService.signUpWithEmailPassword(
           emailController.text, passwordController.text, nameController.text);
+      // 회원가입이 다 완료되면 완료페이지로 넘어가기.
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RegisterFinished())
+      );
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));
