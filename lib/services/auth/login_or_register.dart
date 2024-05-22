@@ -2,6 +2,8 @@ import 'package:chat_app_tutorial/pages/login_page.dart';
 import 'package:chat_app_tutorial/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
+import '../../pages/register_page_step1.dart';
+
 class LoginOrRegister extends StatefulWidget {
   const LoginOrRegister({super.key});
 
@@ -24,7 +26,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
       return LoginPage(onTap: togglePages);
     }
     else{
-      return RegisterPage(onTap: togglePages);
+      return RegisterStep1(onTap: togglePages);
     }
   }
 }
