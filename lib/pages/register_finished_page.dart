@@ -1,4 +1,5 @@
 import 'package:chat_app_tutorial/components/my_button.dart';
+import 'package:chat_app_tutorial/services/auth/auth_gate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class _RegisterFinishedState extends State<RegisterFinished> {
   void goToLoginPage(){
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => LoginOrRegister())
+        MaterialPageRoute(builder: (context) => AuthGate())
     );
   }
 
