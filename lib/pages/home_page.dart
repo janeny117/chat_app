@@ -128,16 +128,16 @@ class _HomePageState extends State<HomePage> {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
 
     //display all users except for current user
-    if (_auth.currentUser!.email != data['email']) {
+    if (_auth.currentUser!.email != data['name']) {
       return ListTile(
-        title: Text(data['email']),
+        title: Text(data['name']),
         onTap: () {
           //pass the clicked user's UID to the chat page
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ChatPage(
-                        receiverUserEmail: data['email'],
+                        receiverUserEmail: data['name'],
                         receiverUserID: data['uid'],
                       )));
         },
