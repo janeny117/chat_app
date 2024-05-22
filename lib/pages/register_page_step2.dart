@@ -88,7 +88,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
                     height: 50,
                   ),
                   //create account message
-                  Text(
+                  const Text(
                     "회원가입",
                     style: TextStyle(
                       fontSize: 16,
@@ -96,22 +96,6 @@ class _RegisterStep2State extends State<RegisterStep2> {
                   ),
                   const SizedBox(
                     height: 20,
-                  ),
-                  //email textfield
-                  MyTextField(
-                      controller: emailController,
-                      hintText: '이메일',
-                      obscureText: false),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  // nameTextField
-                  MyTextField(
-                      controller: nameController,
-                      hintText: '이름',
-                      obscureText: false),
-                  const SizedBox(
-                    height: 10,
                   ),
                   //password textfield
                   MyTextField(
