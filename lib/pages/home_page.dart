@@ -1,5 +1,7 @@
 import 'package:chat_app_tutorial/pages/chat_page.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
+import 'package:chat_app_tutorial/pages/Screen2.dart';
+import 'package:chat_app_tutorial/pages/Screen3.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -76,12 +78,12 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
+/*
   Widget Screen2() {
     return Scaffold(
       body: Center(
         child: Text(
-          'Screen2',
+          'Screen2 from local file',
           style: TextStyle(
             fontSize: 20.0,
           ),
@@ -94,7 +96,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: Text(
-          'Screen3',
+          'Screen3 from local file',
           style: TextStyle(
             fontSize: 20.0,
           ),
@@ -102,6 +104,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+ */
 
   // build a list of user except for the current Logged in user
   Widget _buildUserList() {
