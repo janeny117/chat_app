@@ -40,15 +40,70 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text("Cloud Talk", style: TextStyle(color: Colors.white,)),
+        scrolledUnderElevation: 0,
+        title: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            Row(
+              children: [
+                SizedBox(width: 15,),
+                Icon(Icons.cloud, color: Colors.white70,size: 30,),
+                SizedBox(width: 5,),
+                Text("Home", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,)),
+              ],
+            ),
+            Row(
+              children: [
+                SizedBox(width: 15,),
+                Icon(Icons.cloud, color: Colors.white70,size: 30,),
+                SizedBox(width: 5,),
+                Text("Chats", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,)),
+              ],
+            ),
+            Row(
+              children: [
+                SizedBox(width: 15,),
+                Icon(Icons.cloud, color: Colors.white70,size: 30,),
+                SizedBox(width: 5,),
+                Text("Settings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,)),
+              ],
+            ),
+          ],
+        ),
         actions: [
-          // sign out button
-          IconButton(
-            onPressed: signOut,
-            icon: const Icon(Icons.logout),
-            color: Colors.white,
+          IndexedStack(
+            index: _selectedIndex,
+            children: [
+              // Page 1
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.add_box_outlined, color: Colors.white, size: 30, ),
+                ],
+              ),
+              // Page 2
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.add_circle_outline_outlined, color: Colors.white, size: 30, ),
+                ],
+              ),
+              // Page 3
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: signOut,
+                    icon: const Icon(Icons.logout),
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+            ],
           )
         ],
+
+
       ),
       body: IndexedStack(
         index: _selectedIndex,
@@ -59,18 +114,25 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedItemColor: Colors.lightBlueAccent[100],
+        iconSize: 27,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: '탭1'
+              icon: Icon(Icons.cloud_circle_outlined),
+              label: '탭1',
+              activeIcon: Icon(Icons.cloud_circle)
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline),
-              label: '탭2'
+              icon: Icon(Icons.chat_outlined),
+              label: '탭2',
+              activeIcon: Icon(Icons.chat)
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: '탭3'
+              icon: Icon(Icons.settings_outlined),
+              label: '탭3',
+              activeIcon: Icon(Icons.settings)
           )
         ],
         currentIndex: _selectedIndex,
