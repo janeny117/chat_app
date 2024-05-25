@@ -22,13 +22,39 @@ class _RegisterStep1State extends State<RegisterStep1> {
   final emailController = TextEditingController();
   final nameController = TextEditingController();
 
-
-  // !!!! 이메일과 이름 유효한지 검사 추가.
   void goNext(){
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => RegisterStep2(onTap: widget.onTap, emailController: emailController, nameController: nameController,)),
+    if(isEmailValid(emailController.text) && isNameValid(nameController.text)){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => RegisterStep2(onTap: widget.onTap, emailController: emailController, nameController: nameController,)),
+      );
+    }
+    else{
+      // 에러 디텍션
+    }
+  }
+
+  bool isEmailValid(String email){
+  // 정규 표현식을 사용한 이메일 유효성 검사
+    final RegExp emailRegExp = RegExp(
+        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     );
+    return emailRegExp.hasMatch(email);
+  }
+
+
+  bool isNameValid(String name){
+    // 이름의 유효성 검사: 빈 문자열이 아니고 길이가 적당한지 확인
+    if (name.isEmpty) {
+      return false;
+    }
+
+    // 이름의 길이가 2 이상 50 이하인 경우
+    if (name.length < 2 || name.length > 50) {
+      return false;
+    }
+
+    return true;
   }
 
 
