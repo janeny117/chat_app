@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:chat_app_tutorial/pages/chat_page.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
 import 'package:chat_app_tutorial/pages/Screen2.dart';
@@ -39,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
         scrolledUnderElevation: 0,
         title: IndexedStack(
           index: _selectedIndex,
@@ -47,25 +49,25 @@ class _HomePageState extends State<HomePage> {
             Row(
               children: [
                 SizedBox(width: 15,),
-                Icon(Icons.cloud, color: Colors.white70,size: 30,),
+                Icon(Icons.cloud, color: Colors.lightBlue[200],size: 30,),
                 SizedBox(width: 5,),
-                Text("Home", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,)),
+                Text("Home", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,)),
               ],
             ),
             Row(
               children: [
                 SizedBox(width: 15,),
-                Icon(Icons.cloud, color: Colors.white70,size: 30,),
+                Icon(Icons.cloud, color: Colors.lightBlue[200],size: 30,),
                 SizedBox(width: 5,),
-                Text("Chats", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,)),
+                Text("Chats", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,)),
               ],
             ),
             Row(
               children: [
                 SizedBox(width: 15,),
-                Icon(Icons.cloud, color: Colors.white70,size: 30,),
+                Icon(Icons.cloud, color: Colors.lightBlue[200],size: 30,),
                 SizedBox(width: 5,),
-                Text("Settings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,)),
+                Text("Settings", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,)),
               ],
             ),
           ],
@@ -78,14 +80,14 @@ class _HomePageState extends State<HomePage> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.add_box_outlined, color: Colors.white, size: 30, ),
+                  Icon(Icons.add_box_outlined, color: Colors.black, size: 30, ),
                 ],
               ),
               // Page 2
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.add_circle_outline_outlined, color: Colors.white, size: 30, ),
+                  Icon(Icons.add_circle_outline_outlined, color: Colors.black, size: 30, ),
                 ],
               ),
               // Page 3
@@ -94,8 +96,8 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   IconButton(
                     onPressed: signOut,
-                    icon: const Icon(Icons.logout),
-                    color: Colors.white,
+                    icon: const Icon(Icons.logout,),
+                    color: Colors.black,
                   ),
                 ],
               ),
