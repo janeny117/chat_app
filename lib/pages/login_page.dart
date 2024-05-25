@@ -1,8 +1,11 @@
 import 'package:chat_app_tutorial/components/my_button.dart';
 import 'package:chat_app_tutorial/components/my_text_field.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -85,6 +88,11 @@ class _LoginPageState extends State<LoginPage> {
                   MyButton(onTap: signIn, text: "Sign In"),
                   const SizedBox(
                     height: 50,
+                  ),
+                  SignInButton(
+                      Buttons.Google,
+                      onPressed: (){
+                      },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

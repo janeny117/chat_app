@@ -39,6 +39,8 @@ dependencies:
   provider:
   cloud_firestore: ^4.17.3
   flutter_dotenv: ^5.1.0
+  google_sign_in: ^6.2.1
+  flutter_signin_button:
 
 
 dev_dependencies:
