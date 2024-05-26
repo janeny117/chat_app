@@ -6,7 +6,6 @@ import '../components/my_button.dart';
 import '../components/my_text_field.dart';
 import '../services/auth/auth_service.dart';
 
-
 class RegisterStep1 extends StatefulWidget {
   final void Function()? onTap;
 
@@ -17,20 +16,48 @@ class RegisterStep1 extends StatefulWidget {
 }
 
 class _RegisterStep1State extends State<RegisterStep1> {
-
 //text controller
   final emailController = TextEditingController();
   final nameController = TextEditingController();
 
-
   // !!!! 이메일과 이름 유효한지 검사 추가.
-  void goNext(){
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => RegisterStep2(onTap: widget.onTap, emailController: emailController, nameController: nameController,)),
-    );
+  void goNext() {
+    // 이메일과 이름 필드가 비어있지 않은지 확인
+    if (emailController.text.isNotEmpty && nameController.text.isNotEmpty) {
+      // 둘 다 비어있지 않다면 다음 페이지로 이동
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => RegisterStep2(
+                  onTap: widget.onTap,
+                  emailController: emailController,
+                  nameController: nameController,
+                )),
+      );
+    } else {
+      // 하나라도 비어있다면 에러 메시지를 보여주는 다이얼로그를 표시
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: Colors.white, // AlertDialog의 배경색을 여기서 설정
+          title: Text('오류'),
+          content: Text('모든 필드를 채워주세요.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('확인', style: TextStyle(color: Colors.white)),
+              // 버튼 텍스트 색상을 밝게 설정
+              onPressed: () => Navigator.of(context).pop(),
+              // 다이얼로그 닫기
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(Colors.blue), // 버튼 배경색을 파란색으로 설정
+              ),
+            ),
+          ],
+        ),
+      );
+    }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +77,7 @@ class _RegisterStep1State extends State<RegisterStep1> {
                   Icon(
                     Icons.cloud,
                     size: 80,
-                    color: Colors.grey[800],
+                    color: Colors.lightBlue[200],
                   ),
                   const SizedBox(
                     height: 50,
