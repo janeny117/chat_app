@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                   Icon(
                     Icons.cloud,
                     size: 80,
-                    color:  Colors.lightBlue[200],
+                    color: Colors.grey[800],
                   ),
                   const SizedBox(
                     height: 50,
@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                   //email textfield
                   MyTextField(
                       controller: emailController,
-                      hintText: '이메일',
+                      hintText: 'Email',
                       obscureText: false),
                   const SizedBox(
                     height: 10,
@@ -76,13 +76,13 @@ class _LoginPageState extends State<LoginPage> {
                   //password textfield
                   MyTextField(
                       controller: passwordController,
-                      hintText: '비밀번호',
+                      hintText: 'Password',
                       obscureText: true),
                   const SizedBox(
                     height: 25,
                   ),
-                  //sign button호
-                  MyButton(onTap: signIn, text: "로그인"),
+                  //sign button
+                  MyButton(onTap: signIn, text: "Sign In"),
                   const SizedBox(
                     height: 50,
                   ),

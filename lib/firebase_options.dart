@@ -3,7 +3,6 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
 /// Example:
@@ -51,21 +50,21 @@ class DefaultFirebaseOptions {
 
 
 
-  static FirebaseOptions android = FirebaseOptions(
-    apiKey: dotenv.env['FIREBASE_API_KEY_ANDROID'] ?? '',
-    appId: dotenv.env['FIREBASE_APP_ID_ANDROID'] ?? '',
-    messagingSenderId: dotenv.env['FIREBASE_MESSAGINGSENDER_ID_ANDROID'] ?? '',
-    projectId: dotenv.env['FIREBASE_PROJECT_ID_ANDROID'] ?? '',
-    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET_ANDROID'] ?? '',
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyDeOqud64Oz36nQhoq_7bjJJNVJ-VMDkmY',
+    appId: '1:217960091751:android:cb0cea42b43251171144c2',
+    messagingSenderId: '217960091751',
+    projectId: 'chatapp-tutorial-c3cd7',
+    storageBucket: 'chatapp-tutorial-c3cd7.appspot.com',
   );
 
-  static FirebaseOptions ios = FirebaseOptions(
-    apiKey: dotenv.env['FIREBASE_API_KEY_IOS'] ?? '',
-    appId: dotenv.env['FIREBASE_APP_ID_IOS'] ?? '',
-    messagingSenderId: dotenv.env['FIREBASE_MESSAGINGSENDER_ID_IOS'] ?? '',
-    projectId: dotenv.env['FIREBASE_PROJECT_ID_IOS'] ?? '',
-    storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET_IOS'] ?? '',
-    iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID'] ?? '',
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCwYGxNH6AU_rxPgAhp1EVIpt2z6AptBfg',
+    appId: '1:217960091751:ios:f1e5dbad4fe797e91144c2',
+    messagingSenderId: '217960091751',
+    projectId: 'chatapp-tutorial-c3cd7',
+    storageBucket: 'chatapp-tutorial-c3cd7.appspot.com',
+    iosBundleId: 'com.example.chatAppTutorial',
   );
 
 }
