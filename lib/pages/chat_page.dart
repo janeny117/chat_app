@@ -82,6 +82,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
 
+
   void sendMessage() async {
     // only send message if there is something to send
     if (_messageController.text.isNotEmpty) {
@@ -91,9 +92,11 @@ class _ChatPageState extends State<ChatPage> {
       //clear the text controller after sending the message
       _messageController.clear();
       scrollController.animateTo(
-        0,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.fastLinearToSlowEaseIn,);
+
+          0,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.fastLinearToSlowEaseIn,);
+
     }
   }
 
@@ -153,7 +156,9 @@ class _ChatPageState extends State<ChatPage> {
             ),
           );
         }
-    );
+
+      );
+
   }
 
   // build message item
@@ -168,46 +173,48 @@ class _ChatPageState extends State<ChatPage> {
 
     return data['senderId'] != _firebaseAuth.currentUser!.uid
         ? Container(
-      alignment: alignment,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 8, 180.0, 8),
-        child: Column(
-          crossAxisAlignment:
-          (data['senderId'] == _firebaseAuth.currentUser!.uid)
-              ? CrossAxisAlignment.end
-              : CrossAxisAlignment.start,
-          mainAxisAlignment:
-          (data['senderId'] == _firebaseAuth.currentUser!.uid)
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
-          children: [
-            Text(data['senderEmail']),
-            const SizedBox(height: 5),
-            ChatBubble(message: data['message']),
-          ],
-        ),
-      ),
-    )
+
+            alignment: alignment,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 180.0, 8),
+              child: Column(
+                crossAxisAlignment:
+                (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
+                mainAxisAlignment:
+                (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.start,
+                children: [
+                  Text(data['senderEmail']),
+                  const SizedBox(height: 5),
+                  ChatBubble(message: data['message']),
+                ],
+              ),
+            ),
+          )
         : Container(
-      alignment: alignment,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(180.0, 5, 5, 5),
-        child: Column(
-          crossAxisAlignment:
-          (data['senderId'] == _firebaseAuth.currentUser!.uid)
-              ? CrossAxisAlignment.end
-              : CrossAxisAlignment.start,
-          mainAxisAlignment:
-          (data['senderId'] == _firebaseAuth.currentUser!.uid)
-              ? MainAxisAlignment.end
-              : MainAxisAlignment.start,
-          children: [
-            //const SizedBox(height: 2),
-            ChatBubble(message: data['message']),
-          ],
-        ),
-      ),
-    );
+            alignment: alignment,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(180.0, 5, 5, 5),
+              child: Column(
+                crossAxisAlignment:
+                (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                    ? CrossAxisAlignment.end
+                    : CrossAxisAlignment.start,
+                mainAxisAlignment:
+                (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                    ? MainAxisAlignment.end
+                    : MainAxisAlignment.start,
+                children: [
+                  //const SizedBox(height: 2),
+                  ChatBubble(message: data['message']),
+                ],
+              ),
+            ),
+          );
+
   }
 
   // build message input
