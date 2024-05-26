@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:chat_app_tutorial/pages/chat_page.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
+import 'package:chat_app_tutorial/pages/Screen2.dart';
+import 'package:chat_app_tutorial/pages/Screen3.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,16 +41,71 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text("Cloud Talk", style: TextStyle(color: Colors.white,)),
+        backgroundColor: Colors.white,
+        scrolledUnderElevation: 0,
+        title: IndexedStack(
+          index: _selectedIndex,
+          children: [
+            Row(
+              children: [
+                SizedBox(width: 15,),
+                Icon(Icons.cloud, color: Colors.lightBlue[200],size: 30,),
+                SizedBox(width: 5,),
+                Text("Home", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,)),
+              ],
+            ),
+            Row(
+              children: [
+                SizedBox(width: 15,),
+                Icon(Icons.cloud, color: Colors.lightBlue[200],size: 30,),
+                SizedBox(width: 5,),
+                Text("Chats", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,)),
+              ],
+            ),
+            Row(
+              children: [
+                SizedBox(width: 15,),
+                Icon(Icons.cloud, color: Colors.lightBlue[200],size: 30,),
+                SizedBox(width: 5,),
+                Text("Settings", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,)),
+              ],
+            ),
+          ],
+        ),
         actions: [
-          // sign out button
-          IconButton(
-            onPressed: signOut,
-            icon: const Icon(Icons.logout),
-            color: Colors.white,
+          IndexedStack(
+            index: _selectedIndex,
+            children: [
+              // Page 1
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.add_box_outlined, color: Colors.black, size: 30, ),
+                ],
+              ),
+              // Page 2
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.add_circle_outline_outlined, color: Colors.black, size: 30, ),
+                ],
+              ),
+              // Page 3
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: signOut,
+                    icon: const Icon(Icons.logout,),
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+            ],
           )
         ],
+
+
       ),
       body: IndexedStack(
         index: _selectedIndex,
@@ -57,18 +116,25 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedItemColor: Colors.lightBlueAccent[100],
+        iconSize: 27,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: '탭1'
+              icon: Icon(Icons.cloud_circle_outlined),
+              label: '탭1',
+              activeIcon: Icon(Icons.cloud_circle)
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline),
-              label: '탭2'
+              icon: Icon(Icons.chat_outlined),
+              label: '탭2',
+              activeIcon: Icon(Icons.chat)
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: '탭3'
+              icon: Icon(Icons.settings_outlined),
+              label: '탭3',
+              activeIcon: Icon(Icons.settings)
           )
         ],
         currentIndex: _selectedIndex,
@@ -76,12 +142,12 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
+/*
   Widget Screen2() {
     return Scaffold(
       body: Center(
         child: Text(
-          'Screen2',
+          'Screen2 from local file',
           style: TextStyle(
             fontSize: 20.0,
           ),
@@ -94,7 +160,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Center(
         child: Text(
-          'Screen3',
+          'Screen3 from local file',
           style: TextStyle(
             fontSize: 20.0,
           ),
@@ -102,6 +168,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+ */
 
   // build a list of user except for the current Logged in user
   Widget _buildUserList() {
@@ -109,7 +176,7 @@ class _HomePageState extends State<HomePage> {
       stream: FirebaseFirestore.instance.collection('users').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Text('error');
+          return const Text("error");
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return LoadingPage();
@@ -128,16 +195,16 @@ class _HomePageState extends State<HomePage> {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
 
     //display all users except for current user
-    if (_auth.currentUser!.email != data['email']) {
+    if (_auth.currentUser!.email != data['name']) {
       return ListTile(
-        title: Text(data['email']),
+        title: Text(data['name']),
         onTap: () {
           //pass the clicked user's UID to the chat page
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ChatPage(
-                        receiverUserEmail: data['email'],
+                        receiverUserEmail: data['name'],
                         receiverUserID: data['uid'],
                       )));
         },

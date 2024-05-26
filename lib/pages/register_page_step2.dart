@@ -1,27 +1,41 @@
-import 'package:chat_app_tutorial/components/my_button.dart';
-import 'package:chat_app_tutorial/components/my_text_field.dart';
-import 'package:chat_app_tutorial/services/auth/auth_service.dart';
+import 'package:chat_app_tutorial/pages/login_page.dart';
+import 'package:chat_app_tutorial/pages/register_finished_page.dart';
+import 'package:chat_app_tutorial/pages/register_page_step2.dart';
+import 'package:chat_app_tutorial/services/auth/auth_gate.dart';
+import 'package:chat_app_tutorial/services/auth/login_or_register.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../components/my_button.dart';
+import '../components/my_text_field.dart';
+import '../services/auth/auth_service.dart';
 
-class RegisterPage extends StatefulWidget {
+
+class RegisterStep2 extends StatefulWidget {
   final void Function()? onTap;
+  final emailController;
+  final nameController;
 
-  const RegisterPage({super.key, required this.onTap});
+  const RegisterStep2({super.key, required this.onTap, required this.emailController, required this.nameController});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterStep2> createState() => _RegisterStep2State();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  //text controller
-  final emailController = TextEditingController();
+class _RegisterStep2State extends State<RegisterStep2> {
+//text controller
+  var emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final nameController = TextEditingController();
+  var nameController = TextEditingController();
+
 
   // sign up user
   void signUp() async {
+
+    emailController = widget.emailController;
+    nameController = widget.nameController;
+
     if (passwordController.text != confirmPasswordController.text) {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Password do not match")));
@@ -32,11 +46,24 @@ class _RegisterPageState extends State<RegisterPage> {
     try {
       await authService.signUpWithEmailPassword(
           emailController.text, passwordController.text, nameController.text);
+      // 회원가입이 다 완료되면 완료페이지로 넘어가기.
+      Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RegisterFinished())
+      );
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
+
+  void goToLoginPage(){
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AuthGate())
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,30 +89,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: 50,
                   ),
                   //create account message
-                  Text(
-                    "Let's create an account for you!",
+                  const Text(
+                    "회원가입",
                     style: TextStyle(
                       fontSize: 16,
                     ),
                   ),
                   const SizedBox(
                     height: 20,
-                  ),
-                  //email textfield
-                  MyTextField(
-                      controller: emailController,
-                      hintText: '이메일',
-                      obscureText: false),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  // name textfield
-                  MyTextField(
-                      controller: nameController,
-                      hintText: '이름',
-                      obscureText: false),
-                  const SizedBox(
-                    height: 25,
                   ),
                   //password textfield
                   MyTextField(
@@ -95,7 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  //confirm password textfield
+                  // name textfield
                   MyTextField(
                       controller: confirmPasswordController,
                       hintText: '비밀번호 확인',
@@ -103,6 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   const SizedBox(
                     height: 25,
                   ),
+                  //password textfield
                   //sign up button
                   MyButton(onTap: signUp, text: "회원가입"),
                   const SizedBox(
@@ -116,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         width: 4,
                       ),
                       GestureDetector(
-                          onTap: widget.onTap,
+                          onTap: goToLoginPage,
                           child: const Text(
                             "Login now",
                             style: TextStyle(fontWeight: FontWeight.bold),

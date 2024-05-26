@@ -1,36 +1,36 @@
-import 'package:chat_app_tutorial/components/my_button.dart';
-import 'package:chat_app_tutorial/components/my_text_field.dart';
-import 'package:chat_app_tutorial/services/auth/auth_service.dart';
+import 'package:chat_app_tutorial/pages/register_page_step2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../components/my_button.dart';
+import '../components/my_text_field.dart';
+import '../services/auth/auth_service.dart';
 
-class LoginPage extends StatefulWidget {
+
+class RegisterStep1 extends StatefulWidget {
   final void Function()? onTap;
 
-  const LoginPage({super.key, required this.onTap});
+  const RegisterStep1({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterStep1> createState() => _RegisterStep1State();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterStep1State extends State<RegisterStep1> {
 
-  //text controller
+//text controller
   final emailController = TextEditingController();
-  final passwordController = TextEditingController();
   final nameController = TextEditingController();
-  // sign in user
-  void signIn() async {
-    //get the auth service
-    final authService = Provider.of<AuthService>(context, listen: false);
-    try {
-      await authService.signInWithEmailPassword(
-          emailController.text, passwordController.text, nameController.text) ;
-    } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(e.toString())));
-    }
+
+
+  // !!!! 이메일과 이름 유효한지 검사 추가.
+  void goNext(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RegisterStep2(onTap: widget.onTap, emailController: emailController, nameController: nameController,)),
+    );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +55,9 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 50,
                   ),
-                  //welcome message
-                  Text(
-                    "Welcome back. you\'ve been missed",
+                  //create account message
+                  const Text(
+                    "회원가입",
                     style: TextStyle(
                       fontSize: 16,
                     ),
@@ -68,37 +68,38 @@ class _LoginPageState extends State<LoginPage> {
                   //email textfield
                   MyTextField(
                       controller: emailController,
-                      hintText: 'Email',
+                      hintText: '이메일',
                       obscureText: false),
                   const SizedBox(
                     height: 10,
                   ),
-                  //password textfield
+                  // name textfield
                   MyTextField(
-                      controller: passwordController,
-                      hintText: 'Password',
-                      obscureText: true),
+                      controller: nameController,
+                      hintText: '이름',
+                      obscureText: false),
                   const SizedBox(
                     height: 25,
                   ),
-                  //sign button
-                  MyButton(onTap: signIn, text: "Sign In"),
+                  //password textfield
+                  //sign up button
+                  MyButton(onTap: goNext, text: "계속"),
                   const SizedBox(
                     height: 50,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Not a Member?"),
+                      Text("Already a Member?"),
                       const SizedBox(
                         width: 4,
                       ),
                       GestureDetector(
                           onTap: widget.onTap,
                           child: const Text(
-                            "Register now",
+                            "Login now",
                             style: TextStyle(fontWeight: FontWeight.bold),
-                          ))
+                          )),
                     ],
                   )
                   // not a member? register now
