@@ -10,7 +10,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   //임시
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.android
+  );
   runApp(
     ChangeNotifierProvider(
       create: (context) => AuthService(),

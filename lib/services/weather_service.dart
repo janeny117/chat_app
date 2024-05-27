@@ -23,6 +23,7 @@ class WeatherService {
       throw Exception('Error fetching weather data');
     }
   }
+
   Future<Weather> fetchWeatherByCoordinates(double latitude, double longitude) async {
     final response = await http.get(Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$_apiKey&units=metric'));

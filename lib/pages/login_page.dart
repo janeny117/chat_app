@@ -1,8 +1,10 @@
 import 'package:chat_app_tutorial/components/my_button.dart';
 import 'package:chat_app_tutorial/components/my_text_field.dart';
+import 'package:chat_app_tutorial/pages/home_page.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -19,6 +21,8 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
+  final AuthService _authService = AuthService();
+
   // sign in user
   void signIn() async {
     //get the auth service
@@ -29,6 +33,17 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));
+    }
+  }
+  // sign in with google
+  void googleSignIn() async{
+    final authService = Provider.of<AuthService>(context, listen: false);
+    try{
+      await authService.signInWithGoogle();
+    }catch(e){
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
+          print(e.toString());
     }
   }
 
@@ -85,6 +100,16 @@ class _LoginPageState extends State<LoginPage> {
                   MyButton(onTap: signIn, text: "로그인"),
                   const SizedBox(
                     height: 50,
+                  ),
+                  SignInButton(
+                    Buttons.google,
+                    text: "Sign in with Google",
+                    onPressed: () async {
+                      bool result = await _authService.signInWithGoogle();
+                      if(result){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                      }
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

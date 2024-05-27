@@ -44,22 +44,29 @@ class _ChatPageState extends State<ChatPage> {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
 
     //display all users except for current user
-    if (_auth.currentUser!.email != data['name']) {
-      return ListTile(
-        title: Text(data['name']),
-        onTap: () {
-          //pass the clicked user's UID to the chat page
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChatRoom(
-                        receiverUserEmail: data['name'],
-                        receiverUserID: data['uid'],
-                      )));
-        },
-      );
-    } else {
-      //return empty container
+    try {
+      if (_auth.currentUser!.email != data['name']) {
+        return ListTile(
+          title: Text(data['name']),
+          onTap: () {
+            //pass the clicked user's UID to the chat page
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ChatRoom(
+                          receiverUserEmail: data['name'],
+                          receiverUserID: data['uid'],
+                        )));
+          },
+        );
+      } else {
+        //return empty container
+        return Container();
+      }
+    }
+    catch(e){
+      print(e);
       return Container();
     }
   }

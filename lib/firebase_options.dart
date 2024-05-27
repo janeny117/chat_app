@@ -17,10 +17,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -48,9 +45,6 @@ class DefaultFirebaseOptions {
         );
     }
   }
-
-
-
   static FirebaseOptions android = FirebaseOptions(
     apiKey: dotenv.env['FIREBASE_API_KEY_ANDROID'] ?? '',
     appId: dotenv.env['FIREBASE_APP_ID_ANDROID'] ?? '',
@@ -68,4 +62,12 @@ class DefaultFirebaseOptions {
     iosBundleId: dotenv.env['FIREBASE_IOS_BUNDLE_ID'] ?? '',
   );
 
+  static FirebaseOptions web = FirebaseOptions(
+      apiKey: dotenv.env['FIREBASE_API_KEY_WEB'] ?? '',
+      authDomain: "chatapp-tutorial-c3cd7.firebaseapp.com",
+      projectId: "chatapp-tutorial-c3cd7",
+      storageBucket: "chatapp-tutorial-c3cd7.appspot.com",
+      messagingSenderId: "217960091751",
+      appId: dotenv.env['FIREBASE_API_ID_WEB'] ?? '',
+  );
 }
