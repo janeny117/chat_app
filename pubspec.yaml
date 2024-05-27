@@ -41,6 +41,7 @@
     cloud_firestore: ^4.17.3
     flutter_dotenv: ^5.1.0
     http: ^1.2.1
+    geolocator: ^9.0.1
 
 
 
