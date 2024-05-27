@@ -43,6 +43,7 @@
     http: ^1.2.1
     google_sign_in: ^6.0.1
     sign_in_button:
+    geolocator: ^9.0.1
 
 
 
