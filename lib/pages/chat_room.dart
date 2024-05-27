@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../services/weather_service.dart';
 import '../model/weather_model.dart';
+import '../services/location_service.dart';
+import '../model/location_model.dart';
 
 class ChatRoom extends StatefulWidget {
   final String receiverUserEmail;
@@ -28,6 +30,7 @@ class _ChatRoomState extends State<ChatRoom> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final scrollController = ScrollController();
   final WeatherService _weatherService = WeatherService();
+  final LocationService _locationService = LocationService();
   Weather? _weather;
 
   @override
@@ -38,10 +41,15 @@ class _ChatRoomState extends State<ChatRoom> {
 
   void _fetchWeather() async {
     try {
-      Weather weather = await _weatherService.fetchWeather('Seoul'); //추후 위치정보 받아오기 추가
-      setState(() {
-        _weather = weather;
-      });
+      LocationModel? location = await _locationService.getCurrentLocation();
+      if (location != null) {
+        Weather weather = await _weatherService.fetchWeatherByCoordinates(location.latitude, location.longitude);
+        setState(() {
+          _weather = weather;
+        });
+      } else {
+        print('Error: Could not get location.');
+      }
     } catch (e) {
       print('Error fetching weather data: $e');
     }

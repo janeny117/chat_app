@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:chat_app_tutorial/pages/loading_page.dart';
 
+import 'check_my_info.dart'; // MyInfo 페이지 import
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -35,6 +37,14 @@ class _MainPageState extends State<MainPage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  // MyInfo 페이지로 이동하는 메서드 추가
+  void _navigateToMyInfo() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MyInfo()),
+    );
   }
 
   @override
@@ -74,7 +84,14 @@ class _MainPageState extends State<MainPage> {
         ),
 
         actions: [
+          // MyInfo 페이지로 이동하는 새로운 아이콘 버튼 추가
+          IconButton(
+            icon: const Icon(Icons.info_outline, size: 30),
+            onPressed: _navigateToMyInfo,
+            color: Colors.black,
+          ),
           IndexedStack(
+
             index: _selectedIndex,
             children: [
               // Page 1
