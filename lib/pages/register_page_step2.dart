@@ -10,13 +10,16 @@ import '../components/my_button.dart';
 import '../components/my_text_field.dart';
 import '../services/auth/auth_service.dart';
 
-
 class RegisterStep2 extends StatefulWidget {
   final void Function()? onTap;
   final emailController;
   final nameController;
 
-  const RegisterStep2({super.key, required this.onTap, required this.emailController, required this.nameController});
+  const RegisterStep2(
+      {super.key,
+      required this.onTap,
+      required this.emailController,
+      required this.nameController});
 
   @override
   State<RegisterStep2> createState() => _RegisterStep2State();
@@ -29,10 +32,8 @@ class _RegisterStep2State extends State<RegisterStep2> {
   final confirmPasswordController = TextEditingController();
   var nameController = TextEditingController();
 
-
   // sign up user
   void signUp() async {
-
     emailController = widget.emailController;
     nameController = widget.nameController;
 
@@ -48,22 +49,17 @@ class _RegisterStep2State extends State<RegisterStep2> {
           emailController.text, passwordController.text, nameController.text);
       // 회원가입이 다 완료되면 완료페이지로 넘어가기.
       Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => RegisterFinished())
-      );
+          context, MaterialPageRoute(builder: (context) => RegisterFinished()));
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
-  void goToLoginPage(){
+  void goToLoginPage() {
     Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => AuthGate())
-    );
+        context, MaterialPageRoute(builder: (context) => AuthGate()));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +79,7 @@ class _RegisterStep2State extends State<RegisterStep2> {
                   Icon(
                     Icons.cloud,
                     size: 80,
-                    color: Colors.grey[800],
+                    color: Colors.lightBlue[200],
                   ),
                   const SizedBox(
                     height: 50,

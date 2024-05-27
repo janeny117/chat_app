@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Screen3 extends StatefulWidget {
-  const Screen3({super.key});
+class SettingPage extends StatefulWidget {
+  const SettingPage({super.key});
 
   @override
-  State<Screen3> createState() => _Screen3State();
+  State<SettingPage> createState() => _SettingPageState();
 }
 
-class _Screen3State extends State<Screen3> {
+class _SettingPageState extends State<SettingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: Text(
           'Screen3 from Screen3.dart',
