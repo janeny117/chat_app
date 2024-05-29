@@ -131,7 +131,7 @@ class _MainPageState extends State<MainPage> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedItemColor: Colors.lightBlueAccent[100],
-        iconSize: 27,
+        iconSize: 26,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(Icons.cloud_circle_outlined),
