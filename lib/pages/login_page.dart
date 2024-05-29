@@ -1,6 +1,6 @@
 import 'package:chat_app_tutorial/components/my_button.dart';
 import 'package:chat_app_tutorial/components/my_text_field.dart';
-import 'package:chat_app_tutorial/pages/home_page.dart';
+import 'package:chat_app_tutorial/pages/main_page.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -107,10 +107,11 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () async {
                       bool result = await _authService.signInWithGoogle();
                       if(result){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
                       }
                     },
                   ),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
