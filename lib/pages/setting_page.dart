@@ -13,11 +13,18 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text(
-          'Screen3 from Screen3.dart',
-          style: TextStyle(
-            fontSize: 20.0,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.cloud_circle_rounded, color: Colors.lightBlue, size: 120,),
+            const SizedBox(height: 5,),
+            const Text(
+              "오픈 준비 중...",
+              style: TextStyle(
+                fontSize: 17,
+              ),
+            )
+          ],
         ),
       ),
     );

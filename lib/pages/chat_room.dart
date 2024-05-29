@@ -44,7 +44,7 @@ class _ChatRoomState extends State<ChatRoom> {
       LocationModel? location = await _locationService.getCurrentLocation();
       if (location != null) {
         Weather weather = await _weatherService.fetchWeatherByCoordinates(location.latitude, location.longitude);
-        setState(() {
+        if (mounted) setState(() {
           _weather = weather;
         });
       } else {
@@ -114,7 +114,7 @@ class _ChatRoomState extends State<ChatRoom> {
       resizeToAvoidBottomInset: true, // 가상 키보드 활성화 시 메세지 내용 가리지 않게
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text(widget.receiverUserEmail, style: TextStyle(color: Colors.white,)),
+        title: Text(widget.receiverUserEmail, style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -144,7 +144,7 @@ class _ChatRoomState extends State<ChatRoom> {
             return Text('Error${snapshot.error}');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text('Loading..');
+            return const Text('날씨의 요정 준비 중...', style: TextStyle(fontSize: 13, color: Colors.lightBlueAccent),);
           }
           return Align(
             alignment: Alignment.topCenter,
@@ -235,7 +235,7 @@ class _ChatRoomState extends State<ChatRoom> {
           Expanded(
               child: MyTextField(
                 controller: _messageController,
-                hintText: 'Enter Message',
+                hintText: '메세지를 입력하세요',
                 obscureText: false,
               )),
           // send button

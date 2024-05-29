@@ -51,34 +51,37 @@ class _MyInfoState extends State<MyInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Info'),
+        title: Text('My Info', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
         backgroundColor: Colors.blue,
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator(color: Colors.lightBlue,))
           : _location == null || _weather == null
           ? Center(child: Text('Could not fetch location or weather data.'))
           : Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Location Information',
-                style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold)),
-            SizedBox(height: 10),
-            Text('Latitude: ${_location!.latitude}'),
-            Text('Longitude: ${_location!.longitude}'),
-            SizedBox(height: 20),
-            Text('Weather Information',
-                style: TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.bold)),
-            SizedBox(height: 10),
-            Text('Temperature: ${_weather!.temperature}°C'),
-            Text('Feels Like: ${_weather!.feelsLike}°C'),
-            Text('Humidity: ${_weather!.humidity}%'),
-            Text('Condition: ${_weather!.description}'),
-          ],
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('나의 위치',
+                  style: TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold)),
+              SizedBox(height: 10),
+              Text('위도: ${_location!.latitude}'),
+              Text('경도: ${_location!.longitude}'),
+              SizedBox(height: 20),
+              Text('지금 날씨',
+                  style: TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold)),
+              SizedBox(height: 10),
+              Text('온도: ${_weather!.temperature}°C'),
+              Text('체감온도: ${_weather!.feelsLike}°C'),
+              Text('습도: ${_weather!.humidity}%'),
+              Text('날씨: ${_weather!.description}'),
+            ],
+          ),
         ),
       ),
     );
