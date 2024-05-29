@@ -1,16 +1,11 @@
 import 'dart:ui';
-
-import 'package:chat_app_tutorial/pages/chat_room.dart';
 import 'package:chat_app_tutorial/pages/chat_page.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
 import 'package:chat_app_tutorial/pages/home_page.dart';
 import 'package:chat_app_tutorial/pages/setting_page.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:chat_app_tutorial/pages/loading_page.dart';
 import 'check_my_info.dart'; // MyInfo 페이지 import
 
 class MainPage extends StatefulWidget {
@@ -97,10 +92,7 @@ class _MainPageState extends State<MainPage> {
               const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                    onPressed: null,
-                    icon: Icon(Icons.add_box_outlined, size: 30,),
-                  )
+                  Icon(Icons.add_box_outlined, color: Colors.black, size: 30,),
                 ],
               ),
               // Page 2
@@ -116,7 +108,7 @@ class _MainPageState extends State<MainPage> {
                 children: [
                   IconButton(
                     onPressed: signOut,
-                    icon: const Icon(Icons.logout,),
+                    icon: const Icon(Icons.logout),
                     color: Colors.black,
                   ),
                 ],
