@@ -47,23 +47,7 @@ class _ChatPageState extends State<ChatPage> {
     try {
       if (_auth.currentUser!.email != data['name']) {
         return ListTile(
-          title: Row(
-            children: [
-              Container(
-                  child: Icon(Icons.account_box_rounded, size: 60, color: Colors.black12,)
-              ),
-              const SizedBox(width: 5,),
-              Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(data['name'], style: TextStyle(fontSize: 15),),
-                      Text('상태 메세지', style: TextStyle(fontSize: 10),)
-                    ],
-                  ),
-              ),
-            ],
-          ),
+          title: Text(data['name']),
           onTap: () {
             //pass the clicked user's UID to the chat page
             Navigator.push(
