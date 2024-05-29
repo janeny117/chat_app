@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:chat_app_tutorial/pages/chat_page.dart';
+import 'package:chat_app_tutorial/services/auth/auth_gate.dart';
 import 'package:chat_app_tutorial/services/auth/auth_service.dart';
 import 'package:chat_app_tutorial/pages/home_page.dart';
 import 'package:chat_app_tutorial/pages/setting_page.dart';
@@ -23,7 +24,10 @@ class _MainPageState extends State<MainPage> {
   void signOut() {
     //get auth service
     final authService = Provider.of<AuthService>(context, listen: false);
-
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => AuthGate()),
+          (Route<dynamic> route) => false,
+    );
     authService.signOut();
   }
 
